@@ -1,0 +1,22 @@
+entity.testmodule_testetity.settings:
+  title: 'Settings'
+  route_name: entity.testmodule_testetity.settings
+  base_route: entity.testmodule_testetity.settings
+entity.testmodule_testetity.view:
+  title: 'View'
+  route_name: entity.testmodule_testetity.canonical
+  base_route: entity.testmodule_testetity.canonical
+entity.testmodule_testetity.edit_form:
+  title: 'Edit'
+  route_name: entity.testmodule_testetity.edit_form
+  base_route: entity.testmodule_testetity.canonical
+entity.testmodule_testetity.delete_form:
+  title: 'Delete'
+  route_name: entity.testmodule_testetity.delete_form
+  base_route: entity.testmodule_testetity.canonical
+  weight: 10
+entity.testmodule_testetity.collection:
+  title: 'testetities'
+  route_name: entity.testmodule_testetity.collection
+  base_route: system.admin_content
+  weight: 10

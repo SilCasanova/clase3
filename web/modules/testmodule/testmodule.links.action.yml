@@ -1,0 +1,5 @@
+testmodule_testetity.add_form:
+  title: 'Add testetity'
+  route_name: entity.testmodule_testetity.add_form
+  appears_on:
+    - entity.testmodule_testetity.collection

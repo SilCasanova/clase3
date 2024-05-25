@@ -1,0 +1,7 @@
+entity.testmodule_testetity.settings:
+  path: 'admin/structure/testmodule-testetity'
+  defaults:
+    _form: '\Drupal\testmodule\Form\TestetitySettingsForm'
+    _title: 'testetity'
+  requirements:
+    _permission: 'administer testmodule_testetity'

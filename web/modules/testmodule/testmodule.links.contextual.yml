@@ -1,0 +1,10 @@
+entity.testmodule_testetity.edit_form:
+  route_name: entity.testmodule_testetity.edit_form
+  group: testmodule_testetity
+  title: 'Edit'
+
+entity.testmodule_testetity.delete_form:
+  route_name: entity.testmodule_testetity.delete_form
+  group: testmodule_testetity
+  title: 'Delete'
+  weight: 10

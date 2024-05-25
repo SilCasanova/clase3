@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - testmodule
+id: testmodule_testetity_delete_action
+label: 'Delete testetities'
+type: testmodule_testetity
+plugin: entity:delete_action:testmodule_testetity
+configuration: {  }

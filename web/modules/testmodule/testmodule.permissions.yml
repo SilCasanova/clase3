@@ -1,0 +1,11 @@
+administer testmodule_testetity:
+  title: 'Administer testetities'
+  restrict access: true
+view testmodule_testetity:
+  title: 'View testetity'
+edit testmodule_testetity:
+  title: 'Edit testetity'
+delete testmodule_testetity:
+  title: 'Delete testetity'
+create testmodule_testetity:
+  title: 'Create testetity'

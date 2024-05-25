@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - testmodule
+id: testmodule_testetity_save_action
+label: 'Save testetities'
+type: testmodule_testetity
+plugin: entity:save_action:testmodule_testetity
+configuration: {  }

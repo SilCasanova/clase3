@@ -1,0 +1,85 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Provides a testetity entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function testmodule_theme(): array {
+  return [
+    'testmodule_testetity' => ['render element' => 'elements'],
+  ];
+}
+
+/**
+ * Prepares variables for testetity templates.
+ *
+ * Default template: testmodule-testetity.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the testetity information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_testmodule_testetity(array &$variables): void {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function testmodule_user_cancel($edit, UserInterface $account, $method): void {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish testetities.
+      $storage = \Drupal::entityTypeManager()->getStorage('testmodule_testetity');
+      $testmodule_testetity_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($testmodule_testetity_ids) as $testmodule_testetity) {
+        $testmodule_testetity->set('status', FALSE)->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize testetities.
+      $storage = \Drupal::entityTypeManager()->getStorage('testmodule_testetity');
+      $testmodule_testetity_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($testmodule_testetity_ids) as $testmodule_testetity) {
+        $testmodule_testetity->setOwnerId(0)->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function testmodule_user_predelete(UserInterface $account): void {
+  // Delete testetities that belong to this account.
+  $storage = \Drupal::entityTypeManager()->getStorage('testmodule_testetity');
+  $testmodule_testetity_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  $storage->delete(
+    $storage->loadMultiple($testmodule_testetity_ids)
+  );
+}
